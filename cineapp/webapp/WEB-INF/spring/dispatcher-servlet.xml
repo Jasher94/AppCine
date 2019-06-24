@@ -19,6 +19,9 @@
 	</bean>
 	
 	<mvc:resources mapping="/resources/**" location="/resources/" ></mvc:resources>
+	
+	<!--bean para poder subir archivos en formularioss -->
+	<bean id="multipartResolver" class="org.springframework.web.multipart.support.StandardServletMultipartResolver"></bean>
 	         				 
 
 

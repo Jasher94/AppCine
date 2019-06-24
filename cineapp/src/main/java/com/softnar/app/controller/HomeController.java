@@ -15,9 +15,10 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import com.softnar.app.model.Noticia;
 import com.softnar.app.model.Pelicula;
+import com.softnar.app.service.IBannersService;
 import com.softnar.app.service.INoticiasService;
 import com.softnar.app.service.IPeliculasService;
-import com.softnar.app.util.utileria;
+import com.softnar.app.util.Utileria;
 
 @Controller
 public class HomeController {
@@ -26,6 +27,8 @@ public class HomeController {
 	private IPeliculasService servicePeliculas;
 	@Autowired
 	private INoticiasService serviceNoticias;
+	@Autowired
+	private IBannersService serviceBanners;
 	
 	private SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy");
 
@@ -37,12 +40,13 @@ public class HomeController {
 	@RequestMapping(value="/search", method=RequestMethod.POST)
 	public String buscar(@RequestParam("fecha")String fecha, Model model) {
 
-		List<String> listaFechas = utileria.getNextDays(4);
+		List<String> listaFechas = Utileria.getNextDays(4);
 		List<Pelicula> peliculas = servicePeliculas.buscarTodas();
 		 
 		model.addAttribute("fechas",listaFechas);
 		model.addAttribute("fechaBusqueda", fecha);
-		model.addAttribute("peliculas",peliculas);
+		model.addAttribute("peliculas",peliculas);	
+		model.addAttribute("banners", serviceBanners.buscarTodos()); // Ejercicio : Solucion
 		
 		System.out.println("Buscando todas las peliculas en cartelera para la fecha:"+fecha);
 		return "home";
@@ -53,7 +57,7 @@ public class HomeController {
 	@RequestMapping(value="/",method=RequestMethod.GET)
 	public String mostrarPrincipal(Model model) {
 		
-		List<String> listaFechas = utileria.getNextDays(4);
+		List<String> listaFechas = Utileria.getNextDays(4);
 		
 		List<Pelicula> peliculas = servicePeliculas.buscarTodas();
 		/*
@@ -64,6 +68,7 @@ public class HomeController {
 		model.addAttribute("fechas",listaFechas);
 		model.addAttribute("fechaBusqueda",dateFormat.format(new Date()));
 		model.addAttribute("peliculas",peliculas);
+		model.addAttribute("banners", serviceBanners.buscarTodos()); // Ejercicio : Solucion
 		
 	return "home";
 		
