@@ -1,7 +1,6 @@
 package pruebasrelaciones;
 
 import java.util.List;
-
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 import com.softnar.app.model.Horario;
@@ -13,10 +12,11 @@ public class AppRepoHorarios {
 		ClassPathXmlApplicationContext context = new ClassPathXmlApplicationContext("root-context.xml");
 		HorariosRepository repo = context.getBean("horariosRepository", HorariosRepository.class);
 		
-		
 		List<Horario> lista = repo.findAll();
-		System.out.println("No. de entidades" + lista.size());
-		for(Horario h : lista) {
+		
+		System.out.println("No. de entidades " + lista.size());
+		
+		for (Horario h : lista) {
 			System.out.println(h);
 		}
 		

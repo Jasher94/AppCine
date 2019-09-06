@@ -1,34 +1,33 @@
+/**
+ *  Clase de modelo que representa una noticia en la seccion Noticias / Novedades de la pagina principal
+ */
 package com.softnar.app.model;
 
 import java.util.Date;
-
-import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
 
 @Entity
-@Table(name="Noticias")
+@Table(name = "Noticias")
 public class Noticia {
-	
+
 	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
+	@GeneratedValue(strategy = GenerationType.IDENTITY) // auto_increment MySQL
 	private int id;
-	private String  titulo;
-	@Column(name="fecha",nullable = false)
-	@Temporal(TemporalType.DATE)
+	private String titulo;
 	private Date fecha;
 	private String detalle;
-	private String estatus;
-	
+	private String estatus; // posibles valores: Activa, Inactiva
+
+	/**
+	 * Constructor sin parametros
+	 */
 	public Noticia() {
-		System.out.println("Constructor Noticia");
-		this.fecha = new Date();
-		this.estatus= "Activa";
+		this.fecha = new Date(); // por default la fecha del sistema
+		this.estatus = "Activa"; // por default la noticia esta Activa
 	}
 
 	public int getId() {
@@ -40,7 +39,6 @@ public class Noticia {
 	}
 
 	public String getTitulo() {
-		System.out.println("Set Titulo ");
 		return titulo;
 	}
 
@@ -53,7 +51,6 @@ public class Noticia {
 	}
 
 	public void setFecha(Date fecha) {
-		System.out.println("Set Fecha ");
 		this.fecha = fecha;
 	}
 
@@ -62,7 +59,6 @@ public class Noticia {
 	}
 
 	public void setDetalle(String detalle) {
-		System.out.println("Set Detalle ");
 		this.detalle = detalle;
 	}
 
@@ -79,7 +75,5 @@ public class Noticia {
 		return "Noticia [id=" + id + ", titulo=" + titulo + ", fecha=" + fecha + ", detalle=" + detalle + ", estatus="
 				+ estatus + "]";
 	}
-	
-	
-	
+
 }

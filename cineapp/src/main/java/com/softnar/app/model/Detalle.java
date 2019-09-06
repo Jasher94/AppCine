@@ -1,15 +1,31 @@
+/**
+ * Clase de modelo que representa los detalles extras de una pelicula.
+ */
 package com.softnar.app.model;
 
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Table;
+
+@Entity
+@Table(name = "Detalles")
 public class Detalle {
-	
+
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY) // auto_increment MySQL
 	private int id;
 	private String director;
 	private String actores;
 	private String sinopsis;
-	private String trailer;
-	
+	private String trailer; // url del video de YouTube
+
+	/**
+	 * Constructor sin parametros
+	 */
 	public Detalle() {
-		System.out.println("Constructor Detalle");
+
 	}
 
 	public int getId() {
@@ -57,7 +73,5 @@ public class Detalle {
 		return "Detalle [id=" + id + ", director=" + director + ", actores=" + actores + ", sinopsis=" + sinopsis
 				+ ", trailer=" + trailer + "]";
 	}
-	
-	
 
 }
